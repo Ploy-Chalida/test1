@@ -19,16 +19,18 @@
     }
 
     .paper {
-      width: 350px;
-      height: 250px;
+      width: 600px;
+      height: 420px;
       position: relative;
       transform-style: preserve-3d;
       transition: transform 1s ease;
       cursor: pointer;
+      animation: pulse 3s infinite;
     }
 
     .paper.opened {
       transform: rotateX(180deg);
+      animation: shake 0.6s;
     }
 
     .side {
@@ -37,22 +39,23 @@
       height: 100%;
       backface-visibility: hidden;
       border: 3px solid #d6336c;
-      border-radius: 12px;
+      border-radius: 16px;
       background: white;
       display: flex;
       justify-content: center;
       align-items: center;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 0 20px rgba(214, 51, 108, 0.4);
       overflow: hidden;
     }
 
     .front {
       color: #d6336c;
-      font-size: 1.4rem;
+      font-size: 1.8rem;
       font-weight: bold;
-      padding: 20px;
+      padding: 30px;
       box-sizing: border-box;
       text-align: center;
+      text-shadow: 0 0 8px #ffa6c9;
     }
 
     .back {
@@ -64,14 +67,35 @@
       max-width: 100%;
       max-height: 100%;
       object-fit: contain;
-      border-radius: 12px;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(214, 51, 108, 0.4);
     }
 
-    @media (max-width: 400px) {
+    @media (max-width: 600px) {
       .paper {
         width: 90vw;
-        height: 60vw;
+        height: 65vw;
       }
+
+      .front {
+        font-size: 1.3rem;
+        padding: 20px;
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.02);
+      }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: rotateX(180deg) translateX(0); }
+      20%, 60% { transform: rotateX(180deg) translateX(-5px); }
+      40%, 80% { transform: rotateX(180deg) translateX(5px); }
     }
   </style>
 </head>
@@ -90,7 +114,8 @@
 
   <script>
     function toggleFold() {
-      document.getElementById("paper").classList.toggle("opened");
+      const paper = document.getElementById("paper");
+      paper.classList.toggle("opened");
     }
   </script>
 </body>
